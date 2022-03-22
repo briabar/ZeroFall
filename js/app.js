@@ -30,11 +30,11 @@ let gameLevel = 0; // which level you're on... 0 = 1, 1 = 2...
 userAnswerScreen.addEventListener('keyup', (e)=> {
     console.log(e.code);
 });
-
+//keep focus on user screen
 userAnswerScreen.addEventListener('blur', (e)=> {
     userAnswerScreen.focus();
 });
-//keep focus on user screen
+
 userAnswerScreen.focus();
 
 
@@ -59,37 +59,6 @@ class Bomb {
         this.lane[this.location].appendChild(this.element);
     }
 }
-
-
-
-// let bomb1 = new Bomb('green', 'green', 'green', l1Nodes);
-
-// let levelNum = 0;
-// const challenges = {
-//     0 : ["question 1"],
-//     1 : ["question 2"],
-//     //... and so on...
-// }
-
-// const bombsAdded = [];
-// let winCondition = 0;
-// let userChallengeEl = "bind me to the user input area and enter key"
-
-
-
-
-// function init(level) {
-//     //set start on spacebar
-//     //clear board
-//     //populate questions array (obj?)
-//     //win condition = challenges[0].length
-
-// }
-
-// //controller
-
-
-
 
 
 const controller = {
