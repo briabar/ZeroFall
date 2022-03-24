@@ -519,6 +519,7 @@ const body = document.querySelector('body');
 const lane1 = document.querySelector('#l1');
 const cityQuestionArea = document.querySelector('#question');
 const userAnswerScreen = document.querySelector('#UI');
+const backCity = document.querySelector('#backcity');
 const spaceBarEl = document.createElement('div');
 const bombLaunchSound = [new Audio('/newbomb.wav'), 
     new Audio('/newbomb.wav'), new Audio('/newbomb.wav'),
@@ -566,7 +567,6 @@ let firstPress = true;
 
 const bombFunctions = [ //array of functions for creating bombs
     () => { // only words
-        console.log("FUCK");
         let randWord = wordList[Math.floor(Math.random() * (wordList.length))];
         return {
             word: randWord,
@@ -578,7 +578,6 @@ const bombFunctions = [ //array of functions for creating bombs
     () => {
         let randColor = colorList[Math.floor(Math.random() * (colorList.length))];
         let randChoice = Math.floor(Math.random() * 2);
-        console.log(randChoice);
         if (randChoice === 0) {
             return {
                 word: colorList[Math.floor(Math.random() * (colorList.length))],
@@ -624,11 +623,10 @@ class Bomb {
         el.innerText = this.word;
         this.element = el;
         this.offset = 0;
-        console.log(this.offset);
         this.lane[this.location].appendChild(this.element);
     }
     moveDown() {
-        if (!this.element.classList.contains('.destroyed')) {
+        // if (!this.element.classList.contains('.destroyed')) {
             this.location += 1;
             this.element.style.top = `${this.location/4}%`;
         if (this.offset === 0) {
@@ -636,7 +634,6 @@ class Bomb {
         }
         if (this.flutter < 10) {
             this.flutter += 1;
-            console.log(this.flutter);
             this.offset += .3;
             this.element.style.left = `${this.offset}px`;
         }
@@ -648,7 +645,7 @@ class Bomb {
         else {
             this.flutter = 0;
         }
-        }
+        // }
     }
 }
 
@@ -665,10 +662,11 @@ const controller = {
         if (spaceBarEl.style.display !== 'none') {
             if (keyStroke.code === 'Space') {
                 spaceBarEl.style.display = 'none';
-                if (firstPress) {
-                    introLoop.play();
-                    firstPress = false;
-                }
+                userAnswerScreen.value = '';
+                mainLoop.currentTime = 0;
+                introLoop.currentTime = 0;
+                introLoop.play();
+                view.toggleFire(false)
             }
         }
     },
@@ -687,10 +685,7 @@ const controller = {
         }
         let newBomb = new Bomb(bombDeets.word,bombDeets.color,bombDeets.question, bombDeets.answer, controller.generateRandomLane());
         bombList.push(newBomb);
-        
-        let soundObj = bombLaunchSound.shift();
-        soundObj.play();
-        bombLaunchSound.push(soundObj);
+        view.playBombSound();
     },
 
     increaseBombNumber: function(increaseNum) {
@@ -709,9 +704,6 @@ const controller = {
         intervalID = setInterval(running, speed);
 
     },
-    hitSpacebar: function() {
-
-    }
 }
 
 const view = {
@@ -763,6 +755,19 @@ const view = {
         }
 
     },
+    playBombSound: function () {
+        let soundObj = bombLaunchSound.shift();
+        soundObj.play();
+        bombLaunchSound.push(soundObj);
+    },
+    toggleFire: function(hasFire) {
+        if (hasFire) {
+            backCity.style.background = 'url(/fire.gif)';
+        }
+        else {
+            backCity.style.background = 'none';
+        }
+    }
 }
 
 userAnswerScreen.focus();
@@ -800,7 +805,10 @@ function running () {
         }
     }
     else {
+        mainLoop.pause();
+        view.playBombSound();
         spaceBarEl.style.display = 'block';
+        view.toggleFire(true);
         view.clearBombs();
         view.clearScreen();
         clearInterval(intervalID);
@@ -810,7 +818,6 @@ function running () {
     }
 
 }
-console.log(lane1.children.length)
 // running()
 
 let intervalID = setInterval(running, speed);
