@@ -526,6 +526,28 @@ const bombLaunchSound = [new Audio('/newbomb.wav'),
     new Audio('/newbomb.wav'), new Audio('/newbomb.wav'),  
     new Audio('/newbomb.wav'), new Audio('/newbomb.wav')
     ];
+const introLoop = new Audio('/introloop.wav');
+const mainLoop = new Audio('/mainloop.wav');
+introLoop.addEventListener('timeupdate', function() {
+    let delay = .30;
+    if(this.currentTime > this.duration - delay) {
+        this.currentTime = 0;
+        mainLoop.play();
+        this.pause()
+    }
+});
+// mainLoop.loop = true;
+mainLoop.addEventListener('timeupdate', function() {
+    let delay = .35;
+    if(this.currentTime > this.duration - delay) {
+        this.currentTime = 0;
+        this.play();
+    }
+});
+// introLoop.addEventListener('ended', event => {
+//     mainLoop.play();
+// })
+
 
 spaceBarEl.innerText = "HIT SPACEBAR TO START";
 spaceBarEl.style.position = 'fixed';
@@ -540,6 +562,7 @@ let numberOfBombs = 10; //how many successes before win condition
 const startSpeed = 80; //initial speed
 let speed = startSpeed; //variable speed for level up
 let bombList = [];
+let firstPress = true;
 
 const bombFunctions = [ //array of functions for creating bombs
     () => { // only words
@@ -594,17 +617,37 @@ class Bomb {
         this.answer = answer;
         this.lane = lane;
         this.location = 0;
+        this.flutter = 0;
         let el = document.createElement('div');
         el.classList.add('bomb');
         el.style.color = this.color;
         el.innerText = this.word;
         this.element = el;
+        this.offset = 0;
+        console.log(this.offset);
         this.lane[this.location].appendChild(this.element);
     }
     moveDown() {
         if (!this.element.classList.contains('.destroyed')) {
             this.location += 1;
             this.element.style.top = `${this.location/4}%`;
+        if (this.offset === 0) {
+            this.offset = parseInt(this.element.offsetLeft);
+        }
+        if (this.flutter < 10) {
+            this.flutter += 1;
+            console.log(this.flutter);
+            this.offset += .3;
+            this.element.style.left = `${this.offset}px`;
+        }
+        else if (this.flutter >= 10 && this.flutter < 20) {
+            this.flutter += 1;
+            this.offset -= .3;
+            this.element.style.left = `${this.offset}px`;
+        }
+        else {
+            this.flutter = 0;
+        }
         }
     }
 }
@@ -622,7 +665,10 @@ const controller = {
         if (spaceBarEl.style.display !== 'none') {
             if (keyStroke.code === 'Space') {
                 spaceBarEl.style.display = 'none';
-                
+                if (firstPress) {
+                    introLoop.play();
+                    firstPress = false;
+                }
             }
         }
     },
@@ -712,14 +758,12 @@ const view = {
             bombList[0].element.style.borderColor = 'yellow';
             }
             else {
-                bombList[0].element.style.borderColor = 'white';
+                bombList[0].element.style.borderColor = 'black';
             }
         }
 
     },
 }
-
-
 
 userAnswerScreen.focus();
 //hookup UI
@@ -733,18 +777,7 @@ userAnswerScreen.addEventListener('blur', ()=> {
 
 let staggerBombs = 15;
 
-// function waiting () {
-//     if ( spaceBarEl.display != 'none') {
-//         //do nothing
-//     }
-//     else {
-//         clearInterval(pause)
-//         var intervalID = setInterval(running, speed);
-//     }
-// }
-
 function running () {
-
     if (!gameEnded) {
         if (numberOfBombs >= 1) {
             if (spaceBarEl.style.display === 'none') {
@@ -759,6 +792,8 @@ function running () {
                 view.moveBombsDown();
                 staggerBombs += 1
             }
+        else {
+        }
         }
         else {
             controller.nextLevel()
