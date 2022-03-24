@@ -1,511 +1,54 @@
-
-//Set up state variables first are a few super long ones...
-wordList = [
-    "the",
-    "and",
-    "to",
-    "of",
-    "a",
-    "in",
-    "is",
-    "that",
-    "for",
-    "I",
-    "you",
-    "it",
-    "with",
-    "on",
-    "as",
-    "are",
-    "be",
-    "this",
-    "was",
-    "have",
-    "or",
-    "at",
-    "not",
-    "your",
-    "from",
-    "we",
-    "by",
-    "will",
-    "can",
-    "but",
-    "they",
-    "an",
-    "he",
-    "all",
-    "has",
-    "if",
-    "their",
-    "one",
-    "do",
-    "more",
-    "nt",
-    "my",
-    "his",
-    "so",
-    "there",
-    "about",
-    "which",
-    "when",
-    "what",
-    "out",
-    "up",
-    "our",
-    "who",
-    "also",
-    "had",
-    "time",
-    "some",
-    "would",
-    "were",
-    "like",
-    "been",
-    "just",
-    "her",
-    "new",
-    "other",
-    "them",
-    "she",
-    "people",
-    "these",
-    "no",
-    "get",
-    "how",
-    "me",
-    "into",
-    "than",
-    "only",
-    "its",
-    "most",
-    "may",
-    "any",
-    "many",
-    "make",
-    "then",
-    "well",
-    "first",
-    "very",
-    "over",
-    "now",
-    "could",
-    "after",
-    "even",
-    "because",
-    "us",
-    "said",
-    "good",
-    "way",
-    "two",
-    "should",
-    "work",
-    "use",
-    "through",
-    "see",
-    "know",
-    "did",
-    "much",
-    "where",
-    "years",
-    "need",
-    "him",
-    "back",
-    "such",
-    "those",
-    "being",
-    "day",
-    "take",
-    "while",
-    "here",
-    "before",
-    "does",
-    "great",
-    "year",
-    "go",
-    "help",
-    "want",
-    "really",
-    "think",
-    "best",
-    "life",
-    "each",
-    "made",
-    "right",
-    "world",
-    "business",
-    "home",
-    "own",
-    "down",
-    "still",
-    "used",
-    "find",
-    "around",
-    "going",
-    "every",
-    "both",
-    "last",
-    "off",
-    "too",
-    "same",
-    "information",
-    "little",
-    "another",
-    "look",
-    "few",
-    "long",
-    "part",
-    "since",
-    "things",
-    "place",
-    "am",
-    "between",
-    "during",
-    "different",
-    "must",
-    "come",
-    "using",
-    "however",
-    "without",
-    "high",
-    "why",
-    "something",
-    "online",
-    "system",
-    "better",
-    "three",
-    "never",
-    "always",
-    "love",
-    "say",
-    "might",
-    "next",
-    "company",
-    "state",
-    "number",
-    "again",
-    "free",
-    "lot",
-    "under",
-    "family",
-    "found",
-    "within",
-    "give",
-    "set",
-    "school",
-    "important",
-    "water",
-    "able",
-    "keep",
-    "got",
-    "sure",
-    "end",
-    "money",
-    "service",
-    "small",
-    "put",
-    "experience",
-    "having",
-    "once",
-    "available",
-    "health",
-    "support",
-    "often",
-    "including",
-    "days",
-    "away",
-    "old",
-    "area",
-    "feel",
-    "read",
-    "show",
-    "big",
-    "against",
-    "thing",
-    "order",
-    "program",
-    "though",
-    "city",
-    "group",
-    "services",
-    "site",
-    "making",
-    "course",
-    "point",
-    "children",
-    "times",
-    "team",
-    "game",
-    "along",
-    "let",
-    "house",
-    "today",
-    "body",
-    "working",
-    "case",
-    "man",
-    "real",
-    "provide",
-    "care",
-    "public",
-    "top",
-    "looking",
-    "several",
-    "start",
-    "less",
-    "process",
-    "become",
-    "actually",
-    "local",
-    "together",
-    "person",
-    "change",
-    "book",
-    "enough",
-    "getting",
-    "week",
-    "power",
-    "until",
-    "market",
-    "fact",
-    "god",
-    "food",
-    "students",
-    "full",
-    "women",
-    "community",
-    "name",
-    "second",
-    "data",
-    "government",
-    "says",
-    "others",
-    "ever",
-    "yet",
-    "research",
-    "done",
-    "left",
-    "far",
-    "large",
-    "called",
-    "doing",
-    "already",
-    "development",
-    "social",
-    "open",
-    "possible",
-    "side",
-    "play",
-    "means",
-    "needs",
-    "try",
-    "came",
-    "ca",
-    "based",
-    "hard",
-    "thought",
-    "products",
-    "national",
-    "quality",
-    "level",
-    "live",
-    "design",
-    "makes",
-    "project",
-    "line",
-    "night",
-    "least",
-    "whether",
-    "job",
-    "car",
-    "example",
-    "include",
-    "following",
-    "given",
-    "website",
-    "past",
-    "plan",
-    "offer",
-    "buy",
-    "call",
-    "went",
-    "simply",
-    "hand",
-    "music",
-    "easy",
-    "problem",
-    "men",
-    "country",
-    "took",
-    "four",
-    "members",
-    "form",
-    "personal",
-    "control",
-    "energy",
-    "room",
-    "head",
-    "pay",
-    "create",
-    "run",
-    "kind",
-    "credit",
-    "almost",
-    "believe",
-    "quite",
-    "mind",
-    "law",
-    "early",
-    "comes",
-    "states",
-    "usually",
-    "companies",
-    "web",
-    "taking",
-    "started",
-    "later",
-    "although",
-    "story",
-    "per",
-    "future",
-    "known",
-    "someone",
-    "across",
-    "rather",
-    "young",
-    "whole",
-    "special",
-    "everything",
-    "months",
-    "anything",
-    "training",
-    "url",
-    "bit",
-    "seen",
-    "product",
-    "american",
-    "please",
-    "management",
-    "cost",
-    "either",
-    "light",
-    "university",
-    "face",
-    "due",
-    "nothing",
-    "human",
-    "event",
-    "history",
-    "probably",
-    "friends",
-    "learn",
-    "current",
-    "tell",
-    "general",
-    "price",
-    "list",
-    "type",
-    "building",
-    "industry",
-    "bad",
-    "check",
-    "everyone",
-    "office",
-    "idea",
-    "internet",
-    "news",
-    "million",
-    "video",
-    "among",
-    "air",
-    "especially",
-    "told",
-    "results",
-    "post",
-    "hours",
-    "international",
-    "center",
-    "understand",
-    "above",
-    "addition",
-    "major",
-    "education",
-    "white",
-    "particular",
-    "problems",
-    "media",
-    "according",
-    "upon",
-    "page",
-    "continue",
-    "black",
-    "study",
-    "issues",
-    "inside",
-    "technology",
-    "five",
-    "value",
-    "further",
-    "access",
-    "reason",
-    "short",
-    "true",
-    "simple",
-    "natural",
-    "amount",
-    "search",
-    "result",
-    "taken",
-    "main",
-    "heart",
-    "space",
-    "financial",
-    "ago",
-    "trying",
-    "question",
-    "living",
-    "likely",
-    "interest",
-    "various",
-    "insurance",
-    "common",
-    "move",
-    "child",
-    "yourself",
-    "report",
-    "certain",
-    "share",
-    "single",
-    "close",
-    "instead",
-    "bring",
-    "works",
-    "age",
-    "s",
-    "season",
-    "hope",
-    "coming",
-    "areas",
-    "ask",
-    "medical",
-    "low",
-    "games",
-    "turn",
-    "key",
-    "party",
-    "add",
-    "month",
-    "seems",
-    "view",
-    "fun",
-    "matter",
-    "words",
-    "needed"];
-    
+//Set up state variables first
+wordList = [ 
+    //super long list of words for bombFunctions
+    "the", "and", "to", "of", "a", "in", "is", "that", "for", "you", 
+    "it", "with", "on", "as", "are", "be", "this", "was", "have", "or", 
+    "at", "not", "your", "from", "we", "by", "will", "can", "but", "they",
+     "an", "he", "all", "has", "if", "their", "one", "do", "more", "nt", 
+     "my", "his", "so", "there", "about", "which", "when", "what", "out", 
+     "up", "our", "who", "also", "had", "time", "some", "would", "were", 
+     "like", "been", "just", "her", "new", "other", "them", "she", "people", 
+     "these", "no", "get", "how", "me", "into", "than", "only", "its", 
+     "most", "may", "any", "many", "make", "then", "well", "first", "very", 
+     "over", "now", "could", "after", "even", "because", "us", "said", 
+     "good", "way", "two", "should", "work", "use", "through", "see", 
+     "know", "did", "much", "where", "years", "need", "him", "back", 
+     "such", "those", "being", "day", "take", "while", "here", "before", 
+     "does", "great", "year", "go", "help", "want", "really", "think", 
+     "best", "life", "each", "made", "right", "world", "business", "home", 
+     "own", "down", "still", "used", "find", "around", "going", "every", 
+     "both", "last", "off", "too", "same", "information", "little", "another", 
+     "look", "few", "long", "part", "since", "things", "place", "am", 
+     "between", "during", "different", "must", "come", "using", "however", 
+     "without", "high", "why", "something", "online", "system", "better", 
+     "three", "never", "always", "love", "say", "might", "next", "company", 
+     "state", "number", "again", "free", "lot", "under", "family", "found", 
+     "within", "give", "set", "school", "important", "water", "able", "keep", 
+     "got", "sure", "end", "money", "service", "small", "put", "experience", 
+     "having", "once", "available", "health", "support", "often", "including", 
+     "days", "away", "old", "area", "feel", "read", "show", "big", "against", 
+     "thing", "order", "program", "though", "city", "group", "services", 
+     "site", "making", "course", "point", "children", "times", "team", 
+     "game", "along", "let", "house", "today", "body", "working", "case", 
+     "man", "real", "provide", "care", "public", "top", "looking", "several", 
+     "start", "less", "process", "become", "actually", "local", "together", 
+     "person", "change", "book", "enough", "getting", "week", "power", 
+     "until", "market", "fact", "god", "food", "students", "full", "women", 
+     "community", "name", "second", "data", "government", "says", "others", 
+     "ever", "yet", "research", "done", "left", "far", "large", "called", 
+     "doing", "already", "development", "social", "open", "possible", "side", 
+     "play", "means", "needs", "try", "came", "ca", "based", "hard", 
+     "thought", "products", "national", "quality", "level", "live", "design", 
+     "makes", "project", "line", "night", "least", "whether", "job", "car", 
+     "example", "include", "following", "given", "website", "past", "plan", 
+     "offer", "buy", "call", "went", "simply", "hand", "music", "easy", 
+     "problem", "men", "country", "took", "four", "members", "form", "personal", "control", "energy", "room", "head", "pay", "create", "run", "kind", "credit", "almost", "believe", "quite", "mind", "law", "early", "comes", "states", "usually", "companies", "web", "taking", "started", "later", "although", "story", "per", "future", "known", "someone", "across", "rather", "young", "whole", "special", "everything", "months", "anything", "training", "url", "bit", "seen", "product", "american", "please", "management", "cost", "either", "light", "university", "face", "due", "nothing", "human", "event", "history", "probably", "friends", "learn", "current", "tell", "general", "price", "list", "type", "building", "industry", "bad", "check", "everyone", "office", "idea", "internet", "news", "million", "video", "among", "air", "especially", "told", "results", "post", "hours", "international", "center", "understand", "above", "addition", "major", "education", "white", "particular", "problems", "media", "according", "upon", "page", "continue", "black", "study", "issues", "inside", "technology", "five", "value", "further", "access", "reason", "short", "true", "simple", "natural", "amount", "search", "result", "taken", "main", "heart", "space", "financial", "ago", "trying", "question", "living", "likely", "interest", "various", "insurance", "common", "move", "child", "yourself", "report", "certain", "share", "single", "close", "instead", "bring", "works", "age", "s", "season", "hope", "coming", "areas", "ask", "medical", "low", "games", "turn", "key", "party", "add", "month", "seems", "view", "fun", "matter", "words", "needed"];
+// list of colors for bombFunctions()
 colorList = [
     'green', 'red', 'blue', 'yellow', 'black', 'orange', 'pink', 'purple'
 ];
 
+//set up elements
 const l1Nodes = document.querySelectorAll('#l1 > div');
 const l2Nodes = document.querySelectorAll('#l2 > div');
 const l3Nodes = document.querySelectorAll('#l3 > div');
@@ -529,8 +72,8 @@ const bombLaunchSound = [new Audio('/newbomb.wav'),
     new Audio('/newbomb.wav'), new Audio('/newbomb.wav'),  
     new Audio('/newbomb.wav'), new Audio('/newbomb.wav')
     ];
-const introLoop = new Audio('/introloop.wav');
-const mainLoop = new Audio('/mainloop.wav');
+const introLoop = new Audio('/static/introloop.wav');
+const mainLoop = new Audio('/static/mainloop.wav');
 //this solution to this lag when looping audio was found on stackoverflow
 introLoop.addEventListener('timeupdate', function() {
     let delay = .30;
@@ -551,21 +94,31 @@ mainLoop.addEventListener('timeupdate', function() {
 //setup start menu
 spaceBarEl.innerText = "HIT SPACEBAR TO START";
 spaceBarEl.style.position = 'fixed';
-spaceBarEl.style.top = '42%';
+spaceBarEl.style.top = '51%';
 spaceBarEl.style.fontSize = '1.5em';
 spaceBarEl.style.width = '100%';
 spaceBarEl.style.textAlign = 'center';
 body.appendChild(spaceBarEl);
 
 //utility variables and misc.
-let gameEnded = false; //died?
-let numberOfBombs = 10; //how many successes before win condition
-const startSpeed = 80; //initial speed
-let speed = startSpeed; //variable speed for level up
-let bombList = [];
+const timer = ms =>         //master timer
+    new Promise(
+    res => 
+    setTimeout(res, ms));
+let gameEnded = false;      //died?
+let numberOfBombs = 10;     //how many successes before win condition
+const startSpeed = 80;      //initial speed
+let staggerBombs = 15;      //space out bombs on screen
+let speed = startSpeed;     //variable speed for level up
+let bombList = [];          //new bombs are pushed to this list
+let gameLevel = 0;          //which level you're on... 0 = L1, 1 = L2...
+const maxLevel = 2;         //change this to limit the level
+let speedReductionAmt = 5;  //how much more difficult is each level? 
 
-const bombFunctions = [ //array of functions for creating bombs
-    () => { // regular words
+const bombFunctions = [
+    //array of functions for creating bombs, used by bombDetails
+    () => { 
+        // regular words
         let randWord = wordList[Math.floor(Math.random() * (wordList.length))];
         return {
             word: randWord,
@@ -575,7 +128,8 @@ const bombFunctions = [ //array of functions for creating bombs
             click: false,
         }
     },
-    () => { //color mixups
+    () => { 
+        //color mixups
         let randColor = colorList[Math.floor(Math.random() * (colorList.length))];
         let randChoice = Math.floor(Math.random() * 2);
         if (randChoice === 0) {
@@ -598,6 +152,7 @@ const bombFunctions = [ //array of functions for creating bombs
         }
     },
     () => {
+        //clickables
         return {
             word: "Click Me!",
             color: colorList[Math.floor(Math.random() * (colorList.length))],
@@ -609,16 +164,25 @@ const bombFunctions = [ //array of functions for creating bombs
 ]
 
 const bombDetails = function(level) {
+    //get bombs from bombFunctions and return to controller.genereateNewBomb
     let funcIndex = Math.floor(Math.random() * (level + 1));
-    if (level > 2) {funcIndex = 2} // just two levels, lol
+    //limit the level
+    if (level > maxLevel) {funcIndex = maxLevel}
+    //lower the odds of getting a clickable 1/3
+    if (funcIndex === 2) {
+        let lowerTheOdds = Math.floor(Math.random() * 2);
+        console.log(lowerTheOdds);
+        if (lowerTheOdds === 0) {
+        }
+        else {
+            funcIndex -= 1;
+        }
+    }
     return bombFunctions[funcIndex]();
 }
 
-const timer = ms => new Promise(res => setTimeout(res, ms)); //master timer
-let gameLevel = 0; // which level you're on... 0 = 1, 1 = 2...
-
-
 class Bomb {
+    // bomb class template
     constructor(word, color, question, answer, click, lane) {
         console.log(click);
         this.word = word;
@@ -646,8 +210,8 @@ class Bomb {
             });
         }
     }
-    moveDown() {
-        // if (!this.element.classList.contains('.destroyed')) {
+    moveDown() { 
+            //this is called in main running() function from a list of bombs each turn
             this.location += 1;
             this.element.style.top = `${this.location/4}%`;
         if (this.offset === 0) {
@@ -666,13 +230,13 @@ class Bomb {
         else {
             this.flutter = 0;
         }
-        // }
     }
 }
 
-
+//keep controller functions in object...
 const controller = {
-    grabUserInput: function(keyStroke) {
+    grabUserInput: function(keyStroke) { 
+        //set up text input
         if (bombList[0]) {
             if(userAnswerScreen.value === bombList[0].answer) {
                 view.removeBomb();
@@ -680,9 +244,10 @@ const controller = {
             }
 
         }
-        if (spaceBarEl.style.display !== 'none') {
+        if (spaceBarEl.style.display !== 'none') { 
+            //make start screen work
             if (keyStroke.code === 'Space') {
-                spaceBarEl.style.display = 'none';
+                view.toggleSpaceBar(false);
                 userAnswerScreen.value = '';
                 mainLoop.currentTime = 0;
                 introLoop.currentTime = 0;
@@ -692,14 +257,16 @@ const controller = {
         }
     },
 
-    generateRandomLane: function() {
+    generateRandomLane: function() { 
+        //generate random lane to put bomb in, used in generateNewBomb()
         return laneList[Math.floor(Math.random() * 8)];
     },
 
     generateNewBomb: function(level) {
+        //create new bomb and 
         let fromBombDetails = bombDetails(level);
         let bombDeets = {
-            word: fromBombDetails.word, //take randomly from bomb details
+            word: fromBombDetails.word,
             color: fromBombDetails.color,
             question: fromBombDetails.question,
             answer: fromBombDetails.answer,
@@ -714,13 +281,14 @@ const controller = {
         numberOfBombs += increaseNum;
     },
 
-    nextLevel: function() {
+    nextLevel: function() { 
+        //increase level
         view.clearBombs();
         view.clearScreen();
         gameLevel += 1;
-        if (gameLevel > 2) {gameLevel = 2};
-        if (speed > 10) {
-            speed -= 10
+        if (gameLevel > maxLevel) {gameLevel = maxLevel};
+        if (speed > 15) {
+            speed -= speedReductionAmt;
         }
         controller.increaseBombNumber(10);
         clearInterval(intervalID);
@@ -729,20 +297,24 @@ const controller = {
     },
 }
 
+//put view into object...
 const view = {
-    clearBombs: function() {
+    clearBombs: function() { 
+        //erase all bombs from screen
         bombList.forEach((bomb) => {
             bomb.element.remove();
         });
         bombList = [];
     },
 
-    clearScreen: function() {
+    clearScreen: function() { 
+        //clear the UI
         userAnswerScreen.value = '';
         cityQuestionArea.innerText = '';
     },
 
-    moveBombsDown: function() {
+    moveBombsDown: function() { 
+        //lower each bomb each turn
         bombList.forEach((bomb) => {
             bomb.moveDown()
             if (parseFloat(bomb.element.style.top) >= 79) {
@@ -752,12 +324,14 @@ const view = {
 
     },
     removeBomb: function() {
+        //remove bomb from UI
         let bombToRemove = bombList.shift();
         bombToRemove.element.remove();
         numberOfBombs -= 1;
         view.showQuestion()
     },
     showQuestion: function() {
+        //get question from bomb and display on UI
         if (bombList[0]) {
             if (bombList[0].question != cityQuestionArea.innerText) {
                 cityQuestionArea.display = 'none';
@@ -768,6 +342,7 @@ const view = {
     },
 
     makeFlash: function() {
+        //make lowest bomb flash
         if (bombList[0]) {
             if (bombList[0].element.style.borderColor !== 'yellow') {
             bombList[0].element.style.borderColor = 'yellow';
@@ -779,20 +354,31 @@ const view = {
 
     },
     playBombSound: function () {
+        //play a bomb sound
         let soundObj = bombLaunchSound.shift();
         soundObj.play();
         bombLaunchSound.push(soundObj);
     },
     toggleFire: function(hasFire) {
+        //burn it all down
         if (hasFire) {
-            backCity.style.background = 'url(/fire.gif)';
+            backCity.style.background = 'url(/static/fire.gif)';
             backCity.style.backgroundSize = 'contain';
         }
         else {
             backCity.style.background = 'none';
         }
+    },
+    toggleSpaceBar: function(isVisible) {
+        if (isVisible) {
+            spaceBarEl.style.display = 'block';
+        }
+        else {
+            spaceBarEl.style.display = 'none';
+        }
     }
 }
+
 
 userAnswerScreen.focus();
 //hookup UI
@@ -804,9 +390,9 @@ userAnswerScreen.addEventListener('blur', ()=> {
     userAnswerScreen.focus();
     });
 
-let staggerBombs = 15;
 
 function running () {
+    // this is the main program loop
     if (!gameEnded) {
         if (numberOfBombs >= 1) {
             if (spaceBarEl.style.display === 'none') {
@@ -821,9 +407,9 @@ function running () {
                 view.moveBombsDown();
                 staggerBombs += 1
             }
-        else {
-            //do nothing
-        }
+            else {
+                //do nothing
+            }
         }
         else {
             controller.nextLevel()
@@ -832,7 +418,7 @@ function running () {
     else {
         mainLoop.pause();
         view.playBombSound();
-        spaceBarEl.style.display = 'block';
+        view.toggleSpaceBar(true);
         view.toggleFire(true);
         view.clearBombs();
         view.clearScreen();

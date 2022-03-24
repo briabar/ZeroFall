@@ -1,5 +1,4 @@
 * {
-    /* border: 1px solid red; */
     font-family: 'Supermercado One', cursive;
 }
 
@@ -15,7 +14,7 @@ main {
     flex-direction: column;
     align-items: center;
     flex-wrap: nowrap;
-    background-image: url(/backcity3.png);
+    background-image: url(/static/backcity3.png);
     background-size: cover;
     background-position: center bottom;
 }
