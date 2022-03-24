@@ -521,6 +521,8 @@ const cityQuestionArea = document.querySelector('#question');
 const userAnswerScreen = document.querySelector('#UI');
 const backCity = document.querySelector('#backcity');
 const spaceBarEl = document.createElement('div');
+
+//set up audio stuff
 const bombLaunchSound = [new Audio('/newbomb.wav'), 
     new Audio('/newbomb.wav'), new Audio('/newbomb.wav'),
     new Audio('/newbomb.wav'), new Audio('/newbomb.wav'), 
@@ -529,6 +531,7 @@ const bombLaunchSound = [new Audio('/newbomb.wav'),
     ];
 const introLoop = new Audio('/introloop.wav');
 const mainLoop = new Audio('/mainloop.wav');
+//this solution to this lag when looping audio was found on stackoverflow
 introLoop.addEventListener('timeupdate', function() {
     let delay = .30;
     if(this.currentTime > this.duration - delay) {
@@ -537,7 +540,6 @@ introLoop.addEventListener('timeupdate', function() {
         this.pause()
     }
 });
-// mainLoop.loop = true;
 mainLoop.addEventListener('timeupdate', function() {
     let delay = .35;
     if(this.currentTime > this.duration - delay) {
@@ -545,37 +547,35 @@ mainLoop.addEventListener('timeupdate', function() {
         this.play();
     }
 });
-// introLoop.addEventListener('ended', event => {
-//     mainLoop.play();
-// })
 
-
+//setup start menu
 spaceBarEl.innerText = "HIT SPACEBAR TO START";
 spaceBarEl.style.position = 'fixed';
 spaceBarEl.style.top = '42%';
-spaceBarEl.style.left = '38%';
+spaceBarEl.style.fontSize = '1.5em';
+spaceBarEl.style.width = '100%';
+spaceBarEl.style.textAlign = 'center';
 body.appendChild(spaceBarEl);
 
-let isDead;
-let userInput = [];
-let gameEnded = false;
+//utility variables and misc.
+let gameEnded = false; //died?
 let numberOfBombs = 10; //how many successes before win condition
 const startSpeed = 80; //initial speed
 let speed = startSpeed; //variable speed for level up
 let bombList = [];
-let firstPress = true;
 
 const bombFunctions = [ //array of functions for creating bombs
-    () => { // only words
+    () => { // regular words
         let randWord = wordList[Math.floor(Math.random() * (wordList.length))];
         return {
             word: randWord,
             color: colorList[Math.floor(Math.random() * (colorList.length))],
             question: "Type the word",
             answer: randWord,
+            click: false,
         }
     },
-    () => {
+    () => { //color mixups
         let randColor = colorList[Math.floor(Math.random() * (colorList.length))];
         let randChoice = Math.floor(Math.random() * 2);
         if (randChoice === 0) {
@@ -584,6 +584,7 @@ const bombFunctions = [ //array of functions for creating bombs
                 color: randColor,
                 question: "Type the color",
                 answer: randColor,
+                click: false,
             }
         }
         else {
@@ -592,15 +593,24 @@ const bombFunctions = [ //array of functions for creating bombs
                 color: colorList[Math.floor(Math.random() * (colorList.length))],
                 question: "Type the word",
                 answer: randColor,
+                click: false,
             }
         }
     },
-    //() => {}
+    () => {
+        return {
+            word: "Click Me!",
+            color: colorList[Math.floor(Math.random() * (colorList.length))],
+            question: "Click it!",
+            answer: undefined,
+            click: true,
+        }
+    }
 ]
 
 const bombDetails = function(level) {
     let funcIndex = Math.floor(Math.random() * (level + 1));
-    if (level > 1) {funcIndex = 1} // just two levels, lol
+    if (level > 2) {funcIndex = 2} // just two levels, lol
     return bombFunctions[funcIndex]();
 }
 
@@ -609,11 +619,13 @@ let gameLevel = 0; // which level you're on... 0 = 1, 1 = 2...
 
 
 class Bomb {
-    constructor(word, color, question, answer, lane) {
+    constructor(word, color, question, answer, click, lane) {
+        console.log(click);
         this.word = word;
         this.color = color;
         this.question = question;
         this.answer = answer;
+        this.click = click;
         this.lane = lane;
         this.location = 0;
         this.flutter = 0;
@@ -624,6 +636,15 @@ class Bomb {
         this.element = el;
         this.offset = 0;
         this.lane[this.location].appendChild(this.element);
+        if (this.click === true) {
+            console.log('test');
+            this.element.addEventListener('click', () => {
+                if (this.element === bombList[0].element) {
+                    console.log('ASFASF');
+                    view.removeBomb();
+                }
+            });
+        }
     }
     moveDown() {
         // if (!this.element.classList.contains('.destroyed')) {
@@ -682,8 +703,9 @@ const controller = {
             color: fromBombDetails.color,
             question: fromBombDetails.question,
             answer: fromBombDetails.answer,
+            click: fromBombDetails.click,
         }
-        let newBomb = new Bomb(bombDeets.word,bombDeets.color,bombDeets.question, bombDeets.answer, controller.generateRandomLane());
+        let newBomb = new Bomb(bombDeets.word,bombDeets.color,bombDeets.question, bombDeets.answer, bombDeets.click, controller.generateRandomLane());
         bombList.push(newBomb);
         view.playBombSound();
     },
@@ -696,6 +718,7 @@ const controller = {
         view.clearBombs();
         view.clearScreen();
         gameLevel += 1;
+        if (gameLevel > 2) {gameLevel = 2};
         if (speed > 10) {
             speed -= 10
         }
@@ -763,6 +786,7 @@ const view = {
     toggleFire: function(hasFire) {
         if (hasFire) {
             backCity.style.background = 'url(/fire.gif)';
+            backCity.style.backgroundSize = 'contain';
         }
         else {
             backCity.style.background = 'none';
@@ -798,6 +822,7 @@ function running () {
                 staggerBombs += 1
             }
         else {
+            //do nothing
         }
         }
         else {
@@ -818,7 +843,7 @@ function running () {
     }
 
 }
-// running()
 
+// game starts here
 let intervalID = setInterval(running, speed);
 const flash = setInterval(view.makeFlash, 500);
