@@ -506,8 +506,6 @@ colorList = [
     'green', 'red', 'blue', 'yellow', 'black', 'orange', 'pink', 'purple'
 ];
 
-
-
 const l1Nodes = document.querySelectorAll('#l1 > div');
 const l2Nodes = document.querySelectorAll('#l2 > div');
 const l3Nodes = document.querySelectorAll('#l3 > div');
@@ -516,8 +514,19 @@ const l5Nodes = document.querySelectorAll('#l5 > div');
 const l6Nodes = document.querySelectorAll('#l6 > div');
 const l7Nodes = document.querySelectorAll('#l7 > div');
 const l8Nodes = document.querySelectorAll('#l8 > div');
+const laneList = [l1Nodes, l2Nodes, l3Nodes, l4Nodes, l5Nodes, l6Nodes, l7Nodes, l8Nodes];
 const body = document.querySelector('body');
+const lane1 = document.querySelector('#l1');
+const cityQuestionArea = document.querySelector('#question');
+const userAnswerScreen = document.querySelector('#UI');
 const spaceBarEl = document.createElement('div');
+const bombLaunchSound = [new Audio('/newbomb.wav'), 
+    new Audio('/newbomb.wav'), new Audio('/newbomb.wav'),
+    new Audio('/newbomb.wav'), new Audio('/newbomb.wav'), 
+    new Audio('/newbomb.wav'), new Audio('/newbomb.wav'),  
+    new Audio('/newbomb.wav'), new Audio('/newbomb.wav')
+    ];
+
 spaceBarEl.innerText = "HIT SPACEBAR TO START";
 spaceBarEl.style.position = 'fixed';
 spaceBarEl.style.top = '42%';
@@ -525,18 +534,14 @@ spaceBarEl.style.left = '38%';
 body.appendChild(spaceBarEl);
 
 let isDead;
-const laneList = [l1Nodes, l2Nodes, l3Nodes, l4Nodes, l5Nodes, l6Nodes, l7Nodes, l8Nodes];
-const lane1 = document.querySelector('#l1');
-const cityQuestionArea = document.querySelector('#question');
-const userAnswerScreen = document.querySelector('#UI');
 let userInput = [];
 let gameEnded = false;
-let numberOfBombs = 10;
-const startSpeed = 80;
-let speed = startSpeed;
-
+let numberOfBombs = 10; //how many successes before win condition
+const startSpeed = 80; //initial speed
+let speed = startSpeed; //variable speed for level up
 let bombList = [];
-const bombFunctions = [
+
+const bombFunctions = [ //array of functions for creating bombs
     () => { // only words
         console.log("FUCK");
         let randWord = wordList[Math.floor(Math.random() * (wordList.length))];
@@ -549,11 +554,23 @@ const bombFunctions = [
     },
     () => {
         let randColor = colorList[Math.floor(Math.random() * (colorList.length))];
-        return {
-            word: colorList[Math.floor(Math.random() * (colorList.length))],
-            color: randColor,
-            question: "Type the color",
-            answer: randColor,
+        let randChoice = Math.floor(Math.random() * 2);
+        console.log(randChoice);
+        if (randChoice === 0) {
+            return {
+                word: colorList[Math.floor(Math.random() * (colorList.length))],
+                color: randColor,
+                question: "Type the color",
+                answer: randColor,
+            }
+        }
+        else {
+            return {
+                word: randColor,
+                color: colorList[Math.floor(Math.random() * (colorList.length))],
+                question: "Type the word",
+                answer: randColor,
+            }
         }
     },
     //() => {}
@@ -624,6 +641,10 @@ const controller = {
         }
         let newBomb = new Bomb(bombDeets.word,bombDeets.color,bombDeets.question, bombDeets.answer, controller.generateRandomLane());
         bombList.push(newBomb);
+        
+        let soundObj = bombLaunchSound.shift();
+        soundObj.play();
+        bombLaunchSound.push(soundObj);
     },
 
     increaseBombNumber: function(increaseNum) {
