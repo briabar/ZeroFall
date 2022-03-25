@@ -171,7 +171,7 @@ const bombFunctions = [
         if (randChoice === 0) {
             //add
             return {
-                word: `${x}+${y}`,
+                word: `${x} PLUS ${y}`,
                 color: colorList[Math.floor(Math.random() * (colorList.length))],
                 question: 'Do math!',
                 answer: `${x + y}`,
@@ -181,7 +181,7 @@ const bombFunctions = [
         else if(randChoice === 1) {
             return {
                 //sub
-                word: `${x}-${y}`,
+                word: `${x} MINUS ${y}`,
                 color: colorList[Math.floor(Math.random() * (colorList.length))],
                 question: 'Do math!',
                 answer: `${x - y}`,
@@ -191,7 +191,7 @@ const bombFunctions = [
         else if (randChoice === 2) {
             //mult
             return {
-                word: `${x}X${y}`,
+                word: `${x} TIMES ${y}`,
                 color: colorList[Math.floor(Math.random() * (colorList.length))],
                 question: 'Do math!',
                 answer: `${x * y}`,
