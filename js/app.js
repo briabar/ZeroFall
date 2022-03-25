@@ -240,6 +240,7 @@ class Bomb {
             this.element.addEventListener('click', () => {
                 if (this.element === bombList[0].element) {
                     view.removeBomb();
+                    userAnswerScreen.focus();
                 }
             });
         }
