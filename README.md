@@ -10,7 +10,7 @@
 
 ## Getting Started: 
 
-[text link](https://briabar.github.io/bomberwords/)
+[Play Here](https://briabar.github.io/bomberwords/)
 
 Click the link above to play the game.
 1. When you've mentally steeled yourself hit the spacebar
