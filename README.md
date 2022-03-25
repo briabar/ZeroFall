@@ -6,6 +6,7 @@
 - Javascript
 - HTML
 - CSS
+- Coffee (as in the drink)
 
 ## Getting Started: 
 
