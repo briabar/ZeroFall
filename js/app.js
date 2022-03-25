@@ -113,8 +113,8 @@ let staggerBombs = 15;      //space out bombs on screen
 let speed = startSpeed;     //variable speed for level up
 let bombList = [];          //new bombs are pushed to this list
 let gameLevel = 0;          //which level you're on... 0 = L1, 1 = L2...
-const maxLevel = 2;         //change this to limit the level
-let speedReductionAmt = 5;  //how much more difficult is each level? 
+const maxLevel = 3;         //change this to limit the level
+let speedReductionAmt = 5;  //how much more difficult is each level? should not exceed maximum number of functions in bombFunctions
 let score = 0;              //for top right scoreboard
 
 const bombFunctions = [
@@ -163,17 +163,49 @@ const bombFunctions = [
             click: true,
         }
     },
-    // () => {
-    //     //math
-    //     let x = Math.floor(Math.random() * 2
-    // }
+    () => { //math
+        let randChoice = Math.floor(Math.random() * 3);
+        let x = Math.floor(Math.random() * 10);
+        let y = Math.floor(Math.random() * 10);
+        console.log(randChoice, gameLevel);
+        if (randChoice === 0) {
+            //add
+            return {
+                word: `${x}+${y}`,
+                color: colorList[Math.floor(Math.random() * (colorList.length))],
+                question: 'Do math!',
+                answer: `${x + y}`,
+                click: false,
+            }
+        }
+        else if(randChoice === 1) {
+            return {
+                //sub
+                word: `${x}-${y}`,
+                color: colorList[Math.floor(Math.random() * (colorList.length))],
+                question: 'Do math!',
+                answer: `${x - y}`,
+                click: false,
+            }
+        }
+        else if (randChoice === 2) {
+            //mult
+            return {
+                word: `${x}X${y}`,
+                color: colorList[Math.floor(Math.random() * (colorList.length))],
+                question: 'Do math!',
+                answer: `${x * y}`,
+                click: false,
+            }
+        }
+    },
 ]
 
 const bombDetails = function(level) {
+    //limit the level
+    if (level > maxLevel) {level = maxLevel}
     //get bombs from bombFunctions and return to controller.genereateNewBomb
     let funcIndex = Math.floor(Math.random() * (level + 1));
-    //limit the level
-    if (level > maxLevel) {funcIndex = maxLevel}
     //lower the odds of getting a clickable 1/3
     if (funcIndex === 2) {
         let lowerTheOdds = Math.floor(Math.random() * 2);
@@ -320,6 +352,7 @@ const view = {
         //lower each bomb each turn
         bombList.forEach((bomb) => {
             bomb.moveDown()
+            //end the game
             if (parseFloat(bomb.element.style.top) >= 79) {
                 gameEnded = true;
             }
@@ -351,7 +384,6 @@ const view = {
         //make lowest bomb flash
         if (bombList[0]) {
             let bombFontSize = parseInt(window.getComputedStyle(bombList[0].element).fontSize);
-            console.log(bombFontSize);
             if(bombFontSize <  26) {
                 bombList[0].element.style.fontSize = `${bombFontSize + 2}px`;
             }
