@@ -8,9 +8,14 @@
 - CSS
 - Coffee (as in the drink)
 
+## Music
+- The music was made by me.  Check out my music youtube at:
+[Listen Here](https://www.youtube.com/channel/UCnpxLs2nPj-cw-UkNL8vcbg?sub_confirmation=1)
+#### Please like an subscribe!
+
 ## Getting Started: 
 
-[Play Here](https://briabar.github.io/bomberwords/)
+[Play Here](https://briabar.github.io/ZeroFall/)
 
 Click the link above to play the game.
 1. When you've mentally steeled yourself hit the spacebar

@@ -67,14 +67,14 @@ const spaceBarEl = document.createElement('div');
 const scoreBoard = document.querySelector('#score');
 
 //set up audio stuff
-const bombLaunchSound = [new Audio('https://briabar.github.io/bomberwords/static/newbomb.wav'), 
-    new Audio('https://briabar.github.io/bomberwords/static/newbomb.wav'), new Audio('https://briabar.github.io/bomberwords/static/newbomb.wav'),
-    new Audio('https://briabar.github.io/bomberwords/static/newbomb.wav'), new Audio('https://briabar.github.io/bomberwords/static/newbomb.wav'), 
-    new Audio('https://briabar.github.io/bomberwords/static/newbomb.wav'), new Audio('https://briabar.github.io/bomberwords/static/newbomb.wav'),  
-    new Audio('https://briabar.github.io/bomberwords/static/newbomb.wav'), new Audio('https://briabar.github.io/bomberwords/static/newbomb.wav')
+const bombLaunchSound = [new Audio('https://briabar.github.io/ZeroFall/static/newbomb.wav'), 
+    new Audio('https://briabar.github.io/ZeroFall/static/newbomb.wav'), new Audio('https://briabar.github.io/ZeroFall/static/newbomb.wav'),
+    new Audio('https://briabar.github.io/ZeroFall/static/newbomb.wav'), new Audio('https://briabar.github.io/ZeroFall/static/newbomb.wav'), 
+    new Audio('https://briabar.github.io/ZeroFall/static/newbomb.wav'), new Audio('https://briabar.github.io/ZeroFall/static/newbomb.wav'),  
+    new Audio('https://briabar.github.io/ZeroFall/static/newbomb.wav'), new Audio('https://briabar.github.io/ZeroFall/static/newbomb.wav')
     ];
-const introLoop = new Audio('https://briabar.github.io/bomberwords/static/introloop.wav');
-const mainLoop = new Audio('https://briabar.github.io/bomberwords/static/mainloop.wav');
+const introLoop = new Audio('https://briabar.github.io/ZeroFall/static/introloop.wav');
+const mainLoop = new Audio('https://briabar.github.io/ZeroFall/static/mainloop.wav');
 //this solution to this lag when looping audio was found on stackoverflow
 introLoop.addEventListener('timeupdate', function() {
     let delay = .30;
@@ -406,7 +406,7 @@ const view = {
     toggleFire: function(hasFire) {
         //burn it all down
         if (hasFire) {
-            backCity.style.background = 'url("https://briabar.github.io/bomberwords/static/fire.gif")';
+            backCity.style.background = 'url("https://briabar.github.io/ZeroFall/static/fire.gif")';
             backCity.style.backgroundSize = 'contain';
         }
         else {
