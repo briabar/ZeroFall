@@ -14,7 +14,7 @@ main {
     flex-direction: column;
     align-items: center;
     flex-wrap: nowrap;
-    background-image: url(/static/backcity3.png);
+    background-image: url("https://briabar.github.io/bomberwords/static/backcity3.png");
     background-size: cover;
     background-position: center bottom;
 }
@@ -49,12 +49,12 @@ main {
 
 #city {
     height: 7vh;
-    font-size: 2em;
     text-align: center;
     background-position-y: 40px;;
 }
 
 #question {
+    font-size: 3em;
     color: aquamarine;
     width: fit-content;
     background-color: rgba(0,0,0,.6);
@@ -95,4 +95,12 @@ main {
 
 .destroyed {
     display: none;
+}
+
+#score {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    color: rgb(127, 255, 212,.6);
+    font-size: 27px;
 }
