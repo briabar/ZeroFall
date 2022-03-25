@@ -109,6 +109,7 @@ const timer = ms =>         //master timer
 let gameEnded = false;      //died?
 let numberOfBombs = 10;     //how many successes before win condition
 const startSpeed = 80;      //initial speed
+const speedLimit = 45;
 let staggerBombs = 15;      //space out bombs on screen
 let speed = startSpeed;     //variable speed for level up
 let bombList = [];          //new bombs are pushed to this list
@@ -323,7 +324,7 @@ const controller = {
         view.clearScreen();
         gameLevel += 1;
         if (gameLevel > maxLevel) {gameLevel = maxLevel};
-        if (speed > 15) {
+        if (speed > speedLimit) {
             speed -= speedReductionAmt;
         }
         controller.increaseBombNumber(10);
