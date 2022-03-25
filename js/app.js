@@ -64,6 +64,7 @@ const cityQuestionArea = document.querySelector('#question');
 const userAnswerScreen = document.querySelector('#UI');
 const backCity = document.querySelector('#backcity');
 const spaceBarEl = document.createElement('div');
+const scoreBoard = document.querySelector('#score');
 
 //set up audio stuff
 const bombLaunchSound = [new Audio('https://briabar.github.io/bomberwords/static/newbomb.wav'), 
@@ -114,6 +115,7 @@ let bombList = [];          //new bombs are pushed to this list
 let gameLevel = 0;          //which level you're on... 0 = L1, 1 = L2...
 const maxLevel = 2;         //change this to limit the level
 let speedReductionAmt = 5;  //how much more difficult is each level? 
+let score = 0;              //for top right scoreboard
 
 const bombFunctions = [
     //array of functions for creating bombs, used by bombDetails
@@ -160,7 +162,11 @@ const bombFunctions = [
             answer: undefined,
             click: true,
         }
-    }
+    },
+    // () => {
+    //     //math
+    //     let x = Math.floor(Math.random() * 2
+    // }
 ]
 
 const bombDetails = function(level) {
@@ -171,7 +177,6 @@ const bombDetails = function(level) {
     //lower the odds of getting a clickable 1/3
     if (funcIndex === 2) {
         let lowerTheOdds = Math.floor(Math.random() * 2);
-        console.log(lowerTheOdds);
         if (lowerTheOdds === 0) {
         }
         else {
@@ -184,7 +189,6 @@ const bombDetails = function(level) {
 class Bomb {
     // bomb class template
     constructor(word, color, question, answer, click, lane) {
-        console.log(click);
         this.word = word;
         this.color = color;
         this.question = question;
@@ -201,10 +205,8 @@ class Bomb {
         this.offset = 0;
         this.lane[this.location].appendChild(this.element);
         if (this.click === true) {
-            console.log('test');
             this.element.addEventListener('click', () => {
                 if (this.element === bombList[0].element) {
-                    console.log('ASFASF');
                     view.removeBomb();
                 }
             });
@@ -248,6 +250,7 @@ const controller = {
             //make start screen work
             if (keyStroke.code === 'Space') {
                 view.toggleSpaceBar(false);
+                scoreBoard.textContent = 0;
                 userAnswerScreen.value = '';
                 mainLoop.currentTime = 0;
                 introLoop.currentTime = 0;
@@ -328,12 +331,15 @@ const view = {
         let bombToRemove = bombList.shift();
         bombToRemove.element.remove();
         numberOfBombs -= 1;
+        cityQuestionArea.style.fontSize = '48px';
+        score += 1;
+        scoreBoard.textContent = score;
         view.showQuestion()
     },
     showQuestion: function() {
         //get question from bomb and display on UI
         if (bombList[0]) {
-            if (bombList[0].question != cityQuestionArea.innerText) {
+            if (bombList[0].question !== cityQuestionArea.innerText) {
                 cityQuestionArea.display = 'none';
                 cityQuestionArea.innerText = bombList[0].question;
                 cityQuestionArea.display = 'inline';
@@ -344,6 +350,11 @@ const view = {
     makeFlash: function() {
         //make lowest bomb flash
         if (bombList[0]) {
+            let bombFontSize = parseInt(window.getComputedStyle(bombList[0].element).fontSize);
+            console.log(bombFontSize);
+            if(bombFontSize <  26) {
+                bombList[0].element.style.fontSize = `${bombFontSize + 2}px`;
+            }
             if (bombList[0].element.style.borderColor !== 'yellow') {
             bombList[0].element.style.borderColor = 'yellow';
             }
@@ -375,6 +386,14 @@ const view = {
         }
         else {
             spaceBarEl.style.display = 'none';
+        }
+    },
+    uxShrinker: function () {
+        let uxFontSize = parseInt(window.getComputedStyle(cityQuestionArea).fontSize);
+        if (uxFontSize > 23) {
+            uxFontSize -= .1;
+            cityQuestionArea.style.fontSize = `${uxFontSize}px`
+
         }
     }
 }
@@ -433,3 +452,4 @@ function running () {
 // game starts here
 let intervalID = setInterval(running, speed);
 const flash = setInterval(view.makeFlash, 500);
+const uxShrink = setInterval(view.uxShrinker, 100);
