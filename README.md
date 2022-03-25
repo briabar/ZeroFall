@@ -1,6 +1,6 @@
 # Zero Fall
 
-![alt text](zerfallscreen.png "Zero Fall")
+![alt text](zerofallscreen.png "Zero Fall")
 
 ## Technologies Used:
 - Javascript
