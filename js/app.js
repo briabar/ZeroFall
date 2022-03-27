@@ -66,6 +66,7 @@ const backCity = document.querySelector('#backcity');
 const spaceBarEl = document.createElement('div');
 const scoreBoard = document.querySelector('#score');
 
+
 //set up audio stuff
 const bombLaunchSound = [new Audio('https://briabar.github.io/ZeroFall/static/newbomb.wav'), 
     new Audio('https://briabar.github.io/ZeroFall/static/newbomb.wav'), new Audio('https://briabar.github.io/ZeroFall/static/newbomb.wav'),
@@ -106,6 +107,7 @@ const timer = ms =>         //master timer
     new Promise(
     res => 
     setTimeout(res, ms));
+const delay = ms => new Promise(res => setTimeout(res, ms));
 let gameEnded = false;      //died?
 let numberOfBombs = 10;     //how many successes before win condition
 const startSpeed = 80;      //initial speed
@@ -338,8 +340,12 @@ const controller = {
 const view = {
     clearBombs: function() { 
         //erase all bombs from screen
-        bombList.forEach((bomb) => {
-            bomb.element.remove();
+        bombList.forEach((bombToRemove) => {
+            let x = bombToRemove.element.style.top;
+            let y = bombToRemove.element.style.left;
+            let w = window.getComputedStyle(bombToRemove.element).width;
+            view.makeExplosion(x, y, w);
+            bombToRemove.element.remove();
         });
         bombList = [];
     },
@@ -364,6 +370,10 @@ const view = {
     removeBomb: function() {
         //remove bomb from UI
         let bombToRemove = bombList.shift();
+        let x = bombToRemove.element.style.top;
+        let y = bombToRemove.element.style.left;
+        let w = window.getComputedStyle(bombToRemove.element).width;
+        view.makeExplosion(x, y, w);
         bombToRemove.element.remove();
         numberOfBombs -= 1;
         cityQuestionArea.style.fontSize = '48px';
@@ -429,6 +439,20 @@ const view = {
             cityQuestionArea.style.fontSize = `${uxFontSize}px`
 
         }
+    },
+    makeExplosion: function(top, left, w) {
+        let el = document.createElement('img');
+        body.appendChild(el);
+        el.style.position = 'absolute';
+        el.style.display = 'none';
+        el.style.left = left;
+        el.style.top = top;
+        el.style.height = w;
+        el.style.width = w;
+        el.style.display = 'block';
+        el.src = '';
+        el.src = 'static/explosion.gif?'+new Date().getTime();
+        // explosion.remove();
     }
 }
 
@@ -450,6 +474,10 @@ function running () {
         if (numberOfBombs >= 1) {
             if (spaceBarEl.style.display === 'none') {
                 if (staggerBombs === 25) {
+                    let oldExplosions = document.querySelectorAll('img');
+                    oldExplosions.forEach(el => {
+                        el.remove();
+                    });
                     staggerBombs = 0;
                     controller.generateNewBomb(gameLevel);
         
