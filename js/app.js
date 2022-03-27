@@ -96,10 +96,12 @@ mainLoop.addEventListener('timeupdate', function() {
 //setup start menu
 spaceBarEl.innerText = "HIT SPACEBAR TO START";
 spaceBarEl.style.position = 'fixed';
-spaceBarEl.style.top = '51%';
-spaceBarEl.style.fontSize = '1.5em';
+spaceBarEl.style.top = '30%';
+spaceBarEl.style.fontSize = '2.5em';
 spaceBarEl.style.width = '100%';
 spaceBarEl.style.textAlign = 'center';
+spaceBarEl.style.fontFamily = 'cursive';
+spaceBarEl.style.color = 'white';
 body.appendChild(spaceBarEl);
 
 //utility variables and misc.
